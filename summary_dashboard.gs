@@ -1,6 +1,31 @@
 // Googleスプレッドシートの売上データを集計し、月次サマリーとチャートを作成
 
 /**
+ * 環境確認テスト（デバッグ用）
+ * シートの存在確認とスプレッドシート情報を取得
+ */
+function testEnvironment() {
+  try {
+    Logger.log("=== 環境確認テスト開始 ===");
+
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    Logger.log("スプレッドシート名: " + ss.getName());
+    Logger.log("スプレッドシートURL: " + ss.getUrl());
+
+    const sheets = ss.getSheets();
+    Logger.log("シート総数: " + sheets.length);
+
+    sheets.forEach((sheet, index) => {
+      Logger.log((index + 1) + ". シート名: " + sheet.getName() + " | 最終行: " + sheet.getLastRow());
+    });
+
+    Logger.log("=== 環境確認テスト完了 ===");
+  } catch (error) {
+    Logger.log("環境確認エラー: " + error.message);
+  }
+}
+
+/**
  * メインの集計処理
  * 売上データシートを読み込み、月次サマリーを作成し、グラフを生成
  */
