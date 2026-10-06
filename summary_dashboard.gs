@@ -1,6 +1,15 @@
 // Googleスプレッドシートの売上データを集計し、月次サマリーとチャートを作成
 
 /**
+ * シンプルな接続テスト
+ */
+function simpleTest() {
+  Logger.log("シンプルテスト実行");
+  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  Logger.log("OK: " + ss.getName());
+}
+
+/**
  * 環境確認テスト（デバッグ用）
  * シートの存在確認とスプレッドシート情報を取得
  */
