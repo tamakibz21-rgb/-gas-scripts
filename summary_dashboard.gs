@@ -40,7 +40,7 @@ function runDashboard() {
     const allSheets = ss.getSheets();
     Logger.log("利用可能なシート: " + allSheets.map(s => s.getName()).join(", "));
 
-    const sourceSheet = ss.getSheetByName("売上データ");
+    const sourceSheet = ss.getSheetByName("売上データー");
     const summarySheet = ss.getSheetByName("月次サマリー");
 
     if (!sourceSheet) {
