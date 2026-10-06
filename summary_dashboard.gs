@@ -129,9 +129,15 @@ function runDashboard() {
     Logger.log("集計月数: " + Object.keys(monthlyData).length + "ヶ月");
 
     // 月次サマリーシートをクリア（ヘッダーは残す）
+    Logger.log("サマリーシートのクリア処理開始");
     const summaryLastRow = summarySheet.getLastRow();
     if (summaryLastRow > 1) {
-      summarySheet.deleteRows(2, summaryLastRow - 1);
+      try {
+        summarySheet.getRange(2, 1, summaryLastRow - 1, 3).clearContent();
+        Logger.log("データ行をクリアしました");
+      } catch (clearError) {
+        Logger.log("クリア処理エラー: " + clearError.message);
+      }
     }
 
     // ヘッダーを確認・設定
@@ -161,7 +167,11 @@ function runDashboard() {
     Logger.log("サマリーシートへの書き込み完了");
 
     // グラフを作成
-    createChart(ss, summarySheet);
+    try {
+      createChart(ss, summarySheet);
+    } catch (chartError) {
+      Logger.log("グラフ作成中にエラー発生（続行）: " + chartError.message);
+    }
 
     Logger.log("=== runDashboard 完了 ===");
   } catch (error) {
